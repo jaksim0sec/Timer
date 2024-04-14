@@ -12,6 +12,7 @@
     h1 {
       font-weight: bold;
       font-family: 굴림체;
+			color : black;
     }
 		a{
 		 a:link { color: #282828; text-decoration: none;}
@@ -33,34 +34,21 @@
 			outline: none;
 			}
     }
-		#deco {
-			width: 50px;
-			height: 50px;
-			-webkit-appearance: none;
-			-moz-appearance: none;
-			appearance: none;
-			background-color: transparent;
-			border: none;
-		}
-		/* 안쪽부분의 디자인 변경 */
-		#deco::-webkit-color-swatch {
-			border-radius: 30px;
-			border: none;
-		}
-    input[type="color"] {
-      width: 30px;
-      height: 30px;
-      border: 1px solid black;
-      border-radius: 10px;
-      background-color: white;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-			#deco::-webkit-color-swatch {
+			input[type="color"] {
+				width: 30px;
+				height: 30px;
+				border: 1px solid black;
+				border-radius: 10px;
+				background-color: white;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+
+			input[type="color"]::-webkit-color-swatch {
 				border-radius: 30px;
 				border: none;
-    }
-
+			}
     .setting {
       margin: 10px;
     }
@@ -68,10 +56,10 @@
   </style>
 </head>
 
-<body>
-
-  <button id="settingbutton" onclick="SettingWindowOPCL()" style="border: 1px solid black; color: black; border-radius: 10px; width: 30px; height: 30px;font-weight: bold;">⚙</button>
-  <div class="setting" id="settingwindow" style="opacity: 0; width: 320px; border: 1px dashed black; height:auto; margin: 10px; border-radius: 5px;">
+<body style="margin: 0px;">
+<div id = "head-main" style="padding: 0px; margin: 0px;">
+  <button id="settingbutton" onclick="SettingWindowOPCL()" style="border: 1px solid black; color: black; border-radius: 10px; width: 40px; height: 40px; margin: 10px; font-size: 20px;">⚙</button>
+  <div class="setting" id="settingwindow" style="opacity: 0%; width: 320px; border: 1px solid black; height:auto; margin: 10px; border-radius: 5px; background-color: white; box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); position: absolute;">
     <div class="backgroundColor" style="margin: 10px;">
       <div>배경색 설정</div>
       <input type="color" class="setting" id="backgroundColor">
@@ -82,19 +70,33 @@
       <input type="color" class="setting" id="fontColor">
       <button class="setting" onclick="changeFontColor()" style="border: 1px solid black; color: black; border-radius: 10px;">색상 적용</button>
     </div>
-  </div>
+		<div class="ColorReco" style="margin: 10px;">
+			<div>추천색상</div>
+			<button style = "background-color: #DEBF9C; margin-left: 0px;" class="setting" onclick="document.querySelector('body').style.backgroundColor = '#F4DFC7';document.querySelector('body').style.color = 'black';" style="border: 1px solid black; color: black; border-radius: 10px;">#카페같은</button>
+			<button style = "background-color: #E2AE98; margin-left: 0px;" class="setting" onclick="document.querySelector('body').style.backgroundColor = '#FFE6DB';document.querySelector('body').style.color = '#350303';" style="border: 1px solid black; color: black; border-radius: 10px;">#봄이좋냐</button>
+			<button style = "background: linear-gradient(150deg, #F8FFFF, #D4F4FA, #fff1d1, #FBC3AB); margin-left: 0px; color: black;" class="setting" onclick="
+				var randomColor = Math.floor(Math.random() * 16777216).toString(16);
+				let rdcolor =  '#' + ('000000' + randomColor).slice(-6);
+				
+				document.querySelector('body').style.backgroundColor= rdcolor; document.querySelector('body').style.color = 'black';" style="border: 1px solid black; color: black; border-radius: 10px;">#랜덤색상</button>
 
-  <div style="text-align: center;">
-    <div id="timer" style="font-size: 60px;" style="position: absolute; margin-bottom: 10px;text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);">00:00:00</div>
+
+
+			
+		</div>
+  </div>
+	
+  <div style="text-align: center; margin: 10%;">
+    <div id="timer" style="font-size: 60px;" style="position: absolute; margin-bottom: 10px;text-shadow: 2px 2px 4px rgba(0, 0, 0, 1); color: gray;">00:00:00</div>
     <button onclick="TimerWork();" style="background-color:#66e37b;">시작</button>
     <button onclick="TimerPause();" style="background-color:#ff7d59;">정지</button>
     <button onclick="TimerRestart();" style="background-color:#f0f0f0;color:black;">초기화</button>
     <div style="width: 100%; height: 15px;"></div>
-    <input type="number" placeholder="시간" id="hour" value="0" style="width: 10%; height: 20px; border:1px solid black; border-radius:10px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);" maxlength="10" >
-    <input type="number" placeholder="분" id="min" value="0" style="width: 10%; height: 20px; border:1px solid black; border-radius:10px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);" maxlength="2">
-    <input type="number" placeholder="초" id="sec" value="0" style="width: 10%; height: 20px; border:1px solid black; border-radius:10px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);" maxlength="2">
+    <input type="number" placeholder="시간" id="hour" value="0" style="width: 10%; height: 20px; border:1px solid black; border-radius:10px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);" maxlength="10" min="0" max="">
+    <input type="number" placeholder="분" id="min" value="0" style="width: 10%; height: 20px; border:1px solid black; border-radius:10px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);" maxlength="2" min="0" max="59">
+    <input type="number" placeholder="초" id="sec" value="0" style="width: 10%; height: 20px; border:1px solid black; border-radius:10px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);" maxlength="2" min="0" max="59">
   </div>
-
+</div><!--head-main end-->
   <script>
     let timerInterval;
     let TimerSec = 0;
@@ -102,6 +104,7 @@
     let TimerHour = 0;
 
     function TimerWork() {
+			document.getElementById("timer").style.color = "black";
       TimerSec = parseInt(document.getElementById("sec").value);
       TimerMin = parseInt(document.getElementById("min").value);
       TimerHour = parseInt(document.getElementById("hour").value);
@@ -114,6 +117,7 @@
     }
 
     function TimerRestart() {
+			document.getElementById("timer").style.color = "gray";
       clearInterval(timerInterval);
       TimerSec = 0;
       TimerMin = 0;
@@ -140,13 +144,21 @@
 			TimerMin = 0;
 			updateDisplay();
 			TimerPause();}
-			updateDisplay();
+		updateDisplay();
 		}
 
     function updateDisplay() {
-      const timerDisplay = document.getElementById('timer');
+			const timerDisplay = document.getElementById('timer');
+			if (TimerHour === 0 && TimerMin === 0 && TimerSec < 6 && TimerSec !== 0)
+			{
+				timerDisplay.style.color = "#F05243";
+			}
+			else
+			{
+				timerDisplay.style.color = "black";
+			}
       timerDisplay.textContent = formatTime(TimerHour) + ':' + formatTime(TimerMin) + ':' + formatTime(TimerSec);
-			document.title = '다목적 타이머 ▶' + formatTime(TimerHour) + ':' + formatTime(TimerMin) + ':' + formatTime(TimerSec) + "◀";
+			document.title = '▶' + formatTime(TimerHour) + ':' + formatTime(TimerMin) + ':' + formatTime(TimerSec) + "◀ 다목적 타이머";
     }
 
     function formatTime(time) {
@@ -155,14 +167,17 @@
 
     function SettingWindowOPCL() {
       var settingWindow = document.getElementById('settingwindow');
-      var currentOpacity = parseFloat(settingWindow.style.opacity);
+      var SettingOPCL = document.getElementById('settingbutton');
 
-      if (currentOpacity === 1) {
+      if (SettingOPCL.textContent === "x") 
+			{
         settingWindow.style.opacity = 0;
-        document.getElementById('settingbutton').textContent = "⚙";
-      } else {
+        SettingOPCL.textContent = "⚙";
+      } 
+			else 
+			{
         settingWindow.style.opacity = 1;
-        document.getElementById('settingbutton').textContent = "x";
+				SettingOPCL.textContent  = "x";
       }
     }
 
@@ -176,7 +191,7 @@
       document.querySelector('body').style.color = fontColor;
     }
   </script>
-	<div id="tail-main" style="margin-top: 10%; width: 100%;  height: 230px; background-color: transparent; display: block;">
+	<div id="tail-main" style="margin:0px; margin-top: 15%; width: 100%;  height: 250px; background-color: black; display: block; opacity: 20%;">
 		<div style="height: 50px;"></div>
 		<center><div id="under_info" style="display: block; ">
 			<h4 style="color: #747474; margin-bottom: 5px;">도라가미 크루</h4>
